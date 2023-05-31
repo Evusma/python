@@ -1,8 +1,9 @@
-##
-# Script for automotise data in ArcGIS Online
-# It runs in the server, with Task Scheduler (Windows)
-# It gets the feature layer and query the data
-# It runs every day
+##############################################################
+# Script for automating data in ArcGIS Online                #
+# It runs in the server, thanks to Task Scheduler (Windows)  #
+# It gets the feature layer and query the data               #
+# It runs every day to keep the map updated                  #
+##############################################################
 
 from datetime import date
 from arcgis.gis import GIS
@@ -17,8 +18,8 @@ def main():
     travaux = gis.content.get('78d23333b02c4c08a3048c379dfe5a98') # accesing feature layer using item id
     travaux_layer = travaux.layers[0] # accesing layer
 
-    # select features to delete and to write the logs    
-    feat_set = travaux_layer.query(where = " fin < CURRENT_TIMESTAMP ") # in this case, we look for the roadwork which are finished
+    # select features to delete and to write the logs (where date < today) 
+    feat_set = travaux_layer.query(where = " fin < CURRENT_TIMESTAMP ") # in this case, we look for the roadworks which are finished
     feat_dict = feat_set.to_dict()
 
     # write the log with the information of roadworks
@@ -39,7 +40,7 @@ def main():
     security_copy_layer = security_copy.layers[0] # accesing layer
     security_copy_layer.edit_features(adds = feat_set)
 
-    # delete features where date < today
+    # delete features (where date < today)
     travaux_maj = travaux_layer.delete_features(where = " fin < CURRENT_TIMESTAMP ")
 
     # write the log with the list of deleted features
@@ -54,6 +55,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
-    
+    main()  
 
