@@ -2,7 +2,7 @@
 # Script of tyep ETL for updating data stored in PostgreSQL/PostGIS          #
 #       * it gets the data (csv format)                                      #
 #       * it uploads the data to PostGIS                                     #
-#       * it makes a join to add the geographical information to the data    #
+#       * it checks missing data in the view due to a data not joined        #
 ##############################################################################
 
 import os
