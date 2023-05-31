@@ -23,6 +23,9 @@ def main():
     # delete the shapefile from arcgis online
     item_export.delete(force = True)
     
+    # delete the data of arcgis online
+    gis.content.get('78d23333b02c4c08a3048c379dfe5a98').layers[0].delete_features(where = "globalid <> ''")
+    
 
 if __name__ == "__main__":
     main()
