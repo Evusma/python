@@ -1,9 +1,12 @@
-##############################################################
-# Script for automating data in ArcGIS Online                #
-# It runs in the server, thanks to Task Scheduler (Windows)  #
-# It gets the feature layer and query the data               #
-# It runs every day to keep the map updated                  #
-##############################################################
+#####################################################################
+# Script for automating data in ArcGIS Online                       #
+# It runs in the server, thanks to Task Scheduler (Windows)         #
+# It gets the feature layer and query the data                      #
+# It runs every day to keep the map updated:                        #
+#       * it checks the roadworks which are finished                #
+#       * it deletes them from the map                              #
+#       * it makes a security copy (for storage and later analysis) #
+#####################################################################
 
 from datetime import date
 from arcgis.gis import GIS
