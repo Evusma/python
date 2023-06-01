@@ -14,14 +14,14 @@ today = date.today()
 
 def main():
     # arcgis online connection
-    gis = GIS(username = "username", password = "password")
+    gis = GIS(username="username", password="password")
     print("Connected to the GIS as {}.".format(gis.properties.user.username))
 
     # accesing the data (the data comes from a layer where the officer adds the information)
     pc_layer = gis.content.get('3516641b5222444be13b0e67a00ef00b').layers[0]
 
     # select features to delete (where dossier_pc not null)
-    pc_dict = pc_layer.query(where = " dossier_pc <> '0' " ).to_dict()['features'] # list of dictionarys
+    pc_dict = pc_layer.query(where=" dossier_pc <> '0' ").to_dict()['features'] # list of dictionarys
 
     # list of sites to delete
     a = []
@@ -29,7 +29,7 @@ def main():
         a.append(pc_dict[i]['attributes']['dossier_pc'])
     
     # log of the sites to delete (as reported by the officer)
-    with open( r'C:\xxx\xxx\xxx\info_pc.txt', 'a') as g:
+    with open(r'C:\xxx\xxx\xxx\info_pc.txt', 'a') as g:
         g.write(today.strftime("%d %B %Y"))
         g.write(', les dossiers à effacer : ')
         g.write(str(a))
@@ -47,7 +47,7 @@ def main():
         # where clause of map layer
         whereclause2 = f" DOSSIER = '{a[i]}'"
         
-        pc_log = pc_projet_layer.query(where = whereclause2 ).to_dict()['features']
+        pc_log = pc_projet_layer.query(where=whereclause2 ).to_dict()['features']
         
         # list of deleted sites
         b = []
@@ -55,7 +55,7 @@ def main():
             b.append(pc_log[i]['attributes']['DOSSIER'])
         
         # delete features of map
-        pc_maj = pc_projet_layer.delete_features(where = whereclause2)
+        pc_maj = pc_projet_layer.delete_features(where=whereclause2)
         
         # log of deleted features (features from the map)
         with open( r'C:\xxx\xxx\xxx\info_pc_delete.txt', 'a') as g: 
@@ -64,7 +64,7 @@ def main():
             g.write(str(b))
             g.write('\n\n')
         # delete features of the layer with information
-        pc_layer_maj = pc_layer.delete_features(where = whereclause1)
+        pc_layer_maj = pc_layer.delete_features(where=whereclause1)
 
 
 if __name__ == "__main__":
