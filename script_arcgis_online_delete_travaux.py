@@ -15,14 +15,14 @@ today = date.today()
 
 def main():
     # arcgis online connection
-    gis = GIS(username = "username", password = "password")
+    gis = GIS(username="username", password="password")
 
     # accesing the data
     travaux = gis.content.get('78d23333b02c4c08a3048c379dfe5a98') # accesing feature layer using item id
     travaux_layer = travaux.layers[0] # accesing layer
 
     # select features to delete and to write the logs (where date < today) 
-    feat_set = travaux_layer.query(where = " fin < CURRENT_TIMESTAMP ") # in this case, we look for the roadworks which are finished
+    feat_set = travaux_layer.query(where=" fin < CURRENT_TIMESTAMP ") # in this case, we look for the roadworks which are finished
     feat_dict = feat_set.to_dict()
 
     # write the log with the information of roadworks
@@ -41,10 +41,10 @@ def main():
     # security copy of features before deleting them (they are donwloaded once a month with other script, and uploaded to the PostgreSQL database)
     security_copy = gis.content.get('a2b8e770622e4ab686520d096a2157dd') # accesing feature layer using item id
     security_copy_layer = security_copy.layers[0] # accesing layer
-    security_copy_layer.edit_features(adds = feat_set)
+    security_copy_layer.edit_features(adds=feat_set)
 
     # delete features (where date < today)
-    travaux_maj = travaux_layer.delete_features(where = " fin < CURRENT_TIMESTAMP ")
+    travaux_maj = travaux_layer.delete_features(where=" fin < CURRENT_TIMESTAMP ")
 
     # write the log with the list of deleted features
     list_deleted = travaux_maj['deleteResults']
