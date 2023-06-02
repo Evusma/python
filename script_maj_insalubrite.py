@@ -1,5 +1,5 @@
 ##############################################################################
-# Script of tyep ETL for updating data stored in PostgreSQL/PostGIS          #
+# Script of type ETL for updating data stored in PostgreSQL/PostGIS          #
 #       * it gets the data (csv format)                                      #
 #       * it uploads the data to PostGIS                                     #
 #       * it checks missing data in the view due to a data not joined        #
