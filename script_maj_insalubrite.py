@@ -52,8 +52,7 @@ def main():
     conn.commit()
     
     if inserted == view_data:
-        print('update finished')
-    
+        print('update finished')    
     else:
         # check the missing data
         print('check missing geom data:')
@@ -72,7 +71,6 @@ def main():
     conn.close()
 
     print('Database connexion closed')
-    return 
 
 
 if __name__ == "__main__":
