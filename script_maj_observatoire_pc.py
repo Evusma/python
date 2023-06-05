@@ -45,12 +45,21 @@ def main():
     # check the geometry and data with multiple values in the field to join
     curs.execute("SELECT dossier, parcelles FROM _pc_ads.nsm_2016_2022_pc WHERE geom IS NULL")
     print('with no geom: ', curs.rowcount)
-    curs.fetchall()
+    for row in curs.fetchall():
+        print("dossier " + row[0], end=' - ')
+        print("parcelle " + row[1], end=' - ')
     conn.commit()
     
     # add the bourogh to the data
     curs.execute("UPDATE _pc_ads.nsm_2016_2022_pc as f SET quartier = b.nom FROM __historique.nsm_anciens_quartiers as b WHERE ST_Contains(b.geom, f.geom)")
     conn.commit()
+    
+    curs.execute("SELECT dossier, parcelles FROM _pc_ads.nsm_2016_2022_pc WHERE quartier IS NULL")
+    print('with no borough: ', curs.rowcount)
+    for row in curs.fetchall():
+        print("dossier " + row[0], end=' - ')
+        print("parcelle " + row[1], end=' - ')
+    conn.commit(
     
     # rename the table
     curs.execute("SELECT __donnees.alter_table_observatoire_pc()")
