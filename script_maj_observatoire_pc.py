@@ -52,6 +52,10 @@ def main():
     curs.execute("UPDATE _pc_ads.nsm_2016_2022_pc as f SET quartier = b.nom FROM __historique.nsm_anciens_quartiers as b WHERE ST_Contains(b.geom, f.geom)")
     conn.commit()
     
+    # rename the table
+    curs.execute("SELECT __donnees.alter_table_observatoire_pc()")
+    conn.commit()
+    
     curs.close()
     conn.close()
     
