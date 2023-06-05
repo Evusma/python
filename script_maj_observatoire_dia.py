@@ -26,17 +26,39 @@ def main():
         print('postgresql error, not updated')
     else:
         # check update 1 (missing boroughs)  
-        sql1 = f"SELECT geom, id_dia, n_dia, quartier, date FROM _foncier.nsm_2016_{current_year}_dia WHERE annee IS NULL"
+        sql1 = f"SELECT id_dia, n_dia, date FROM _foncier.nsm_2016_{current_year}_dia WHERE annee IS NULL"
         curs.execute(sql1)
         print('missing boroughs: ', curs.rowcount)
-        curs.fetchall()
+        for data in curs.fetchall():
+            try:
+                print("id_dia " + data[0], end=' - ')
+            except TypeError:
+                print("id_dia null", end=' - ')
+            try:
+                print("n_dia " + data[1], end=' - ')
+            except TypeError:
+                print("n_dia null", end=' - ')
+            print("date " + data[2])
         conn.commit()
         
         # check update 2 (missing departements) 
-        sql2 = f"SELECT geom, id_dia, n_dia, cp, date FROM _foncier.nsm_2016_{current_year}_dia WHERE depart_acq IS NULL"
+        sql2 = f"SELECT id_dia, n_dia, cp, date FROM _foncier.nsm_2016_{current_year}_dia WHERE depart_acq IS NULL"
         curs.execute(sql2)
         print('missing departements: ', curs.rowcount)
-        curs.fetchall()
+        for data in curs.fetchall():
+            try:
+                print("id_dia " + data[0], end=' - ')
+            except TypeError:
+                print("id_dia null", end=' - ')
+            try:
+                print("n_dia " + data[1], end=' - ')
+            except TypeError:
+                print("n_dia null", end=' - ')
+            try:
+                print("cp " + data[2], end=' - ')
+            except TypeError:
+                print("cp null", end=' - ')
+            print("date " + data[3])
         conn.commit()
     finally:
         conn.commit()
