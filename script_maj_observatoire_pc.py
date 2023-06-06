@@ -47,9 +47,9 @@ def main():
     print('with no geom: ', curs.rowcount)
     for row in curs.fetchall():
         try:
-            print("dossier " + row[0] + "parcelle " + row[1])
+            print("dossier " + row[0] + " parcelle " + row[1])
         except TypeError:
-            print("dossier " + row[0] + "parcelle null")
+            print("dossier " + row[0] + " parcelle null")
     conn.commit()
     
     # add the bourogh to the data
@@ -60,9 +60,9 @@ def main():
     print('with no borough: ', curs.rowcount)
     for row in curs.fetchall():
         try:
-            print("dossier " + row[0] + "parcelle " + row[1])
+            print("dossier " + row[0] + " parcelle " + row[1])
         except TypeError:
-            print("dossier " + row[0] + "parcelle null")
+            print("dossier " + row[0] + " parcelle null")
     conn.commit()
     
     # rename the table
