@@ -22,6 +22,7 @@ def main():
     # execute the update and rename the table (current year)
     try:
         curs.execute("SELECT __donnees.alter_table_observatoire__dia()")
+	conn.commit()
     except:
         print('postgresql error, not updated')
     else:
