@@ -30,7 +30,7 @@ def main():
         curs.execute(sql1)
         print('missing boroughs: ', curs.rowcount)
         for data in curs.fetchall():
-            print("n_dia " + data[0] + "date " + data[1])
+            print("n_dia " + data[0] + " date " + data[1])
         conn.commit()
         
         # check update 2 (missing departements) 
@@ -39,9 +39,9 @@ def main():
         print('missing departements: ', curs.rowcount)
         for data in curs.fetchall():
             try:
-                print("n_dia " + data[0] + "cp " + data[1] + "date " + data[2])
+                print("n_dia " + data[0] + " cp " + data[1] + " date " + data[2])
             except TypeError:
-                print("n_dia " + data[0] + "cp null " + "date " + data[2])
+                print("n_dia " + data[0] + " cp null " + " date " + data[2])
         conn.commit()
     finally:
         conn.commit()
