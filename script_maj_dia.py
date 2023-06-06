@@ -84,7 +84,7 @@ def main():
             try:
                 print("DIA " + row[0] + " parcelle " + row[1])
             except TypeError:
-                print("DIA" + row[0] + " sans parcelle")
+                print("DIA " + row[0] + " sans parcelle")
             finally:
                 print("checked finished")
         conn.commit()
