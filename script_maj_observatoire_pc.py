@@ -46,8 +46,10 @@ def main():
     curs.execute("SELECT dossier, parcelles FROM _pc_ads.nsm_2016_2022_pc WHERE geom IS NULL")
     print('with no geom: ', curs.rowcount)
     for row in curs.fetchall():
-        print("dossier " + row[0], end=' - ')
-        print("parcelle " + row[1], end=' - ')
+        try:
+            print("dossier " + row[0] + "parcelle " + row[1])
+        except TypeError:
+            print("dossier " + row[0] + "parcelle null")
     conn.commit()
     
     # add the bourogh to the data
@@ -57,9 +59,11 @@ def main():
     curs.execute("SELECT dossier, parcelles FROM _pc_ads.nsm_2016_2022_pc WHERE quartier IS NULL")
     print('with no borough: ', curs.rowcount)
     for row in curs.fetchall():
-        print("dossier " + row[0], end=' - ')
-        print("parcelle " + row[1], end=' - ')
-    conn.commit(
+        try:
+            print("dossier " + row[0] + "parcelle " + row[1])
+        except TypeError:
+            print("dossier " + row[0] + "parcelle null")
+    conn.commit()
     
     # rename the table
     curs.execute("SELECT __donnees.alter_table_observatoire_pc()")
