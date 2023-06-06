@@ -95,17 +95,19 @@ def main():
     with open('travaux.csv', 'r', encoding="utf-8") as f:
         query = "COPY __historique.travaux (adresse, debut, fin, arrete, typologie, typologie_, nom_respon, nom_resp_1, descriptio, observatio, identite, courriel, geometry_txt) FROM STDIN WITH CSV HEADER DELIMITER ',' ENCODING 'UTF8'"
         curs.copy_expert(query, f)
+        print('inserted in __historique.travaux: ', curs.rowcount)
     conn.commit()
     
     # include the geometry of type geometry (geom) by transforming the geometry of type text (geometry_txt)
     # transformation from the projection EPSG 3857 to the projection EPSG 2154
     # add the year
     curs.execute("UPDATE __historique.travaux SET geom = ST_Transform(ST_GeometryFromText(geometry_txt,3857), 2154)")
-    curs.execute("UPDATE __historique.travaux SET annee = '2023'")
+    curs.execute("UPDATE __historique.travaux SET annee = (SELECT to_char(now( ), 'yyyy'))")
     conn.commit()
     
     # insert the data to the final table
     curs.execute("INSERT INTO _travaux.nsm_travaux (geom, adresse, debut, fin, arrete, typologie, typologie_, nom_respon, nom_resp_1, descriptio, observatio, identite, courriel, annee) SELECT geom, adresse, debut, fin, arrete, typologie, typologie_, nom_respon, nom_resp_1, descriptio, observatio, identite, courriel, annee FROM __historique.travaux")
+    print('inserted in _travaux.nsm_travaux: ', curs.rowcount)
     conn.commit() 
     
     curs.close()
