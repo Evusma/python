@@ -2,7 +2,7 @@
 ## Some python code I developed during my job as GIS officer
 
 Here, there is two types of python code:
-```sh
+```
 - script_arcgis_online: I use these codes to connect to our ArcGis online platform and manage data.
 - script_maj: I use these codes as an "ETL" tool. 
 ```
