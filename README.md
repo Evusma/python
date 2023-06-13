@@ -10,7 +10,7 @@ Here, there is two types of python code:
 
 Once connected to ArcGis Online, the main data manipulations are: copy, delete, download and write a log document. The main objective here is to keep the maps updated every day.
 
-For example, **_script_arcgis_online_delete_travaux.py_** checks end dates. If some roadworks are finished, it makes a copy and deletes data from the map. [link to the app] [df1]
+For example, **_script_arcgis_online_delete_travaux.py_** checks end dates. If some roadworks are finished, it makes a copy and deletes data from the map. [link to the app][df1]
 
 **_script_maj_**
 
