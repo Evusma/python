@@ -13,6 +13,7 @@ import geopandas as gpd
 import os
 import psycopg2
 import shutil
+import arcgis.gis 
 
 from arcgis.gis import GIS
 from datetime import date
