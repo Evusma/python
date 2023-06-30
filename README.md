@@ -16,6 +16,6 @@ For example, **_script_arcgis_online_delete_travaux.py_** checks end dates. If s
 
 The main manipulations are: take csv documents, connect to our PostgreSQL database and upload the data. Depending on the updated table and its relationships, there can be other manipulations as inputs, addition of geometry or conversion of projection system.
 
-**_scrip_maj_travaux_shp_to_postgis.py_** is an example of code that extract data from Arcgis Online and uploads it to PostgreSQL, using geopandas and some postgis functions to manage geometry column.
+**_scrip_maj_travaux.py_** is an example of code that extract data from Arcgis Online and uploads it to PostgreSQL, using geopandas and some postgis functions to manage geometry column.
 
 [df1]: <https://neuilly.maps.arcgis.com/apps/webappviewer/index.html?id=68e96398518c4cab95146fe78a5b05d9>
