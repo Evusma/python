@@ -85,10 +85,20 @@ def metadata():
         exported = curs.rowcount
         print('number of tables exported (metadata): ', exported)
     conn.commit()
+	
     # query the list of data without metadata
     query2 =""" SELECT schemaname, tablename FROM pgmetadata.v_orphan_tables ORDER BY schemaname, tablename"""
     with open(f'no_metadata{today}.csv', 'w', encoding="utf-8") as f:  
         query = f"COPY ({query2}) TO STDOUT WITH CSV HEADER DELIMITER ',' ENCODING 'UTF8'"
+        curs.copy_expert(query, f)
+        exported = curs.rowcount
+        print('number of tables exported (data without metadata): ', exported)
+    conn.commit()
+	
+    # query the list of metadata without data
+    query3 =""" SELECT schemaname, tablename FROM pgmetadata.v_orphan_metadata ORDER BY schemaname, tablename"""
+    with open(f'metadata_no_data{today}.csv', 'w', encoding="utf-8") as f:  
+        query = f"COPY ({query3}) TO STDOUT WITH CSV HEADER DELIMITER ',' ENCODING 'UTF8'"
         curs.copy_expert(query, f)
         exported = curs.rowcount
         print('number of tables exported (data without metadata): ', exported)
